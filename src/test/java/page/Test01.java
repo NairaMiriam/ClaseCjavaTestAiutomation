@@ -18,7 +18,7 @@ public class Test01 {
     String pathBase = System.getProperty("user.dir");
     String pathDriver = pathBase + "/src/test/resources/driver/chromedriver.exe";
 
-    @Test
+   // @Test
     public void buscarGoogle() throws InterruptedException {
         System.setProperty("webdriver.chrome.driver", pathDriver);
         driver = new ChromeDriver();
