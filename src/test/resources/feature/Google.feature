@@ -1,5 +1,6 @@
 # new feature
 # Tags: optional
+# mvn clean verify -D cucumber.options="--tags @TestOk"
 
 Feature: buscar informacion en google
   Yo Como usuario
