@@ -9,7 +9,7 @@ import page.GooglePage;
 
 public class GoogleStepDefinition {
 
-    GooglePage googlePage=new GooglePage();
+    GooglePage googlePage = new GooglePage();
 
     @Given("^que el usuario carga la pagina web de google$")
     public void queElUsuarioCargaLaPaginaWebDeGoogle() {
@@ -18,8 +18,8 @@ public class GoogleStepDefinition {
     }
 
     @When("^ingresa el texto \"([^\"]*)\" a buscar$")
-    public void ingresaElTextoABuscar(String arg0) throws Throwable {
-
+    public void ingresaElTextoABuscar(String sTexto) throws Throwable {
+        googlePage.ingresarTexto(sTexto);
     }
 
     @Then("^la aplicacion web de google realiza la busqueda del texto \"([^\"]*)\"$")

@@ -63,7 +63,7 @@
                     </includes>
                     <reuseForks>true</reuseForks>
                     <!--<forkCount>2</forkCount>-->
-                    <argLine>-Xmx512m -XX:MaxPermSize=256m</argLine>
+
                 </configuration>
                 <executions>
                     <execution>
