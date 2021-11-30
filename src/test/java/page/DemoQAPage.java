@@ -1,67 +1,86 @@
 package page;
 
 import generic.WebDriverDOM;
-import net.serenitybdd.core.annotations.findby.FindBy;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-@DefaultUrl("https://demoqa.com/")
-public class DemoQAPage extends WebDriverDOM {
-
+    @DefaultUrl("https://demoqa.com/")
+    public class DemoQaPage extends WebDriverDOM {
     @FindBy(className = "category-cards")
-    WebElement categoriaPadre;
+    private WebElement categoria;
 
+    @FindBy(xpath = "//div[@class='category-cards']")
+    private WebElement categoria1;
 
-    @FindBy(className = "(//ul[@class='menu-list'])[1]")
-    WebElement opcMenuPadre;
+    @FindBy(xpath = "//div[@class='accordion']/div[1]/div/ul")
+    private WebElement opcionMenu;
 
-    @FindBy(id = "sampleHeading")
-    WebElement valueIframe;
+    @FindBy(xpath = "//button[@class='rct-collapse rct-collapse-btn']")
+    private WebElement btnHome;
+
+    @FindBy(xpath = "//li[@class='rct-node rct-node-parent rct-node-expanded']")
+    private WebElement cbxHome;
+
 
     public void seleccionarCategoria(String sCategoria) {
-        waitElementIsVisible(categoriaPadre, 10);
-        List<WebElement> listCategoria = categoriaPadre.findElements(By.className("card-body"));
-        System.out.println(listCategoria.size() + "   ---   " + listCategoria.get(1).getText());
+        waitElementVisible(categoria, 5);
+        List<WebElement> listCategoria = categoria.findElements(By.className("card-body"));
+        System.out.printf("lista 01:" + listCategoria.get(1).getText() + "\n");
+        List<WebElement> listCategoria1 = categoria.findElements(By.xpath("//div/div/div[3]/h5"));
+        System.out.printf("lista 02:" + listCategoria1.get(1).getText() + "\n");
+        List<WebElement> listObj = categoria.findElements(By.className("card-up"));
 
-        List<WebElement> listObj = categoriaPadre.findElements(By.className("card-up"));
+        System.out.printf(listObj.size() + "");
 
         for (int i = 0; i < listCategoria.size(); i++) {
-            if (listCategoria.get(i).getText().contains(sCategoria)) {
+            if (listCategoria.get(i).getText().equals(sCategoria)) {
+                System.out.printf(listCategoria.get(i).getText());
+
                 listObj.get(i).click();
                 break;
             }
         }
+
     }
 
 
     public void seleccionarOpcionMenu(String sMenu) {
-        Actions actions=new Actions(getDriver());
-        WebElement element=retornaWebElement(sMenu);
-        waitElementIsVisible(element, 10);
-        System.out.println(element.getText());
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);",element);
-        element.click();
+        waitElementVisible(opcionMenu, 5);
+        List<WebElement> listMenu = opcionMenu.findElements(By.xpath("//li"));
+        System.out.printf("lista menu 01:" + listMenu.get(1).getText() + "\n");
+
+        for (int i = 0; i < listMenu.size(); i++) {
+            if (listMenu.get(i).getText().contains(sMenu)) {
+                System.out.printf(listMenu.get(i).getText());
+                listMenu.get(i).click();
+                break;
+            }
+        }
 
     }
 
-    public WebElement retornaWebElement(String sMenu) {
-        sMenu = sMenu.trim();
-        WebElement element;
-        //div[@class='element-list collapse show']/ul/li/span[contains(text(),"Check Box")]
-        String value = "//div[@class='element-list collapse show']/ul/li/span[contains(text(),'" + sMenu + "')]";
-        return element = getDriver().findElement(By.xpath(value));
+    public void clicHome() {
+        waitElementVisible(btnHome, 5);
+        btnHome.click();
     }
 
-    public void obtenerDatosIframe() {
-        WebElement iframeElement= getDriver().findElement(By.id("frame1"));
-        getDriver().switchTo().frame(iframeElement);
+    public void seleccionarCbxHome(String sCbxHome) {
+        waitElementVisible(cbxHome, 5);
+        List<WebElement> listOpcionHome = cbxHome.findElements(By.xpath("//ol//li/span/label/span[1]"));
+        List<WebElement> listCbxHome = cbxHome.findElements(By.xpath("//ol//li/span/label/span[3]"));
 
-        waitElementIsVisible(valueIframe, 10);
-        System.out.println(valueIframe.getText());
+        for (int i = 0; i < listCbxHome.size(); i++) {
+            if (listCbxHome.get(i).getText().equals(sCbxHome)) {
+                System.out.printf(listCbxHome.get(i).getText()+"   Test ___  \n");
+                listOpcionHome.get(i).click();
+                break;
+            } else {
+                System.out.printf("\n" + "No se encontro el elemento buscado");
+            }
+        }
     }
 }

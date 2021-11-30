@@ -1,39 +1,19 @@
 # new feature
 # Tags: optional
 
-Feature: Pruebas Demo QA
+Feature: Pruebas demo QA
   Como Usuario
-  Quiero validar el Formulario de la aplicacion Demo QA
-  Para Realizar un registro de un cliente
+  Quiero validar check box de la aplicacion demo qa
+  Para obtener las opciones de home
 
-  Scenario Outline: Validar Formulario con datos validos
-    Given que el usuario se encuentra en el home de Demo QA
-    And seleciona la opcion de categoria "<sCategoria>"
-    And Seleccionar la opcion del menu "<sMenu>"
-    When ingresamos informacion al formulario "<sName>" y "<sEmail>"
+  @LoginFacebook
+  Scenario Outline:Validar la opcion desktop
+    Given que el usuario se encuentra en el home de demo qa
+    And seleciona la cateroria "<sCategoria>"
+    And Selecciona la opcion del menu de la categoria "<sMenu>"
+    When selecciona el menu home
+    Then se obtine la opcion del menu "<sCbxHome>"
+    And presiona clic en el menu "<sMenu>"
     Examples:
-      | sCategoria | sMenu    | sName | sEmail          |
-      | Elements   | Text Box | Naira | naira@gmail.com |
-
-  @Alerts
-  Scenario Outline: Validar Frames con datos validos
-    Given que el usuario se encuentra en el home de Demo QA
-    And seleciona la opcion de categoria "<sCategoria>"
-    And Seleccionar la opcion del menu "<sMenu>"
-    When obtiene los datos del Frame
-    Examples:
-      | sCategoria | sMenu  |
-      | Alerts     | Frames |
-
-
-  @ol
-  Scenario Outline: Validar Formulario con datos validos oe
-    Given que el usuario se encuentra en el home de Demo QA
-    And seleciona la opcion de categoria "<sCategoria>"
-    And Seleccionar la opcion del menu "<sMenu>"
-    When ingresamos informacion al formulario
-      | sName | sEmail          |
-      | Naira | naira@gmail.com |
-    Examples:
-      | sCategoria | sMenu    |
-      | Elements   | Text Box |
+      | sCategoria | sMenu     | sCbxHome |
+      | Elements   | Check Box | Desktop  |
